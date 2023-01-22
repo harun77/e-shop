@@ -44,12 +44,10 @@ export class CreateProductComponent implements OnInit, OnDestroy {
     }
 
     this.productService.addProduct(newProduct)
-      .pipe(
-        takeUntil(this.destroy$),
-      )
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.router.navigate(['/products']);
-      })
+      });
   }
 
   ngOnDestroy(): void {

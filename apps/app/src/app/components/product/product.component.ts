@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product/product.service';
 
@@ -12,6 +12,8 @@ import { ProductService } from '../../services/product/product.service';
 export class ProductComponent implements OnInit, OnDestroy {
 
   product: Product | undefined;
+
+  isLoading: boolean;
 
   destroy$: Subject<boolean> = new Subject();
 
@@ -25,13 +27,15 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   private getProduct(id: number): void {
+    this.isLoading = true;
     this.productService.getProduct(id)
       .pipe(
         takeUntil(this.destroy$),
+        finalize(() => this.isLoading = false)
       )
       .subscribe((product: Product) => {
         this.product = product;
-      })
+      });
   }
 
   ngOnDestroy(): void {

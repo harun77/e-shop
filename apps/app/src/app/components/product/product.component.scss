@@ -1,4 +1,23 @@
 .detail {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 50%;
+    height: 100%;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.mat-card-image {
+    width: 25%;
+    height: auto;
+    margin: 0;
+}
+
+.mat-card-content {
+    margin-top: 24px;
 }

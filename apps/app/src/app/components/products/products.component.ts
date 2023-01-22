@@ -54,15 +54,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.productService.deleteProduct(id)
       .pipe(
         takeUntil(this.destroy$),
-        finalize(() => this.pageLoading = false )
+        finalize(() => this.pageLoading = false)
       )
       .subscribe();
   }
 
   sort(): void {
+    this.pageLoading = true;
     this.productService.sortProducts(this.sortBy)
       .pipe(
         takeUntil(this.destroy$),
+        finalize(() => this.pageLoading = false)
       )
       .subscribe((products: any) => {
         this.products = products;

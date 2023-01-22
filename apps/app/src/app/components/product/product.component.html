@@ -1,8 +1,20 @@
-<h1>Product {{ product?.id }}</h1>
-
-<div class="detail">
-    <span>Name: {{ product?.title }}</span>
-    <span>Description: {{ product?.description }}</span>
-    <span>Price: {{ product?.price }}</span>
-    <span>Image: {{ product?.image }}</span>
+<div *ngIf="isLoading" class="loader">
+    <img src="../assets/icons/progress.gif" alt="">
+</div>
+<div *ngIf="!isLoading" class="detail">
+    <h1>Product {{ product?.id }}</h1>
+    <mat-card class="card">
+        <mat-card-header>
+            <mat-card-title>{{ product?.title }}</mat-card-title>
+            <mat-card-subtitle>{{ product?.price }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="product?.image" alt="product?.title">
+        <mat-card-content>
+            <p>{{ product?.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+        </mat-card-actions>
+    </mat-card>
 </div>

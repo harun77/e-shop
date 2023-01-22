@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product/product.service';
 
@@ -15,6 +15,8 @@ export class CategoryProductComponent implements OnInit, OnDestroy {
 
   products: Product[];
 
+  isLoading: boolean;
+
   destroy$: Subject<boolean> = new Subject();
 
   constructor(private route: ActivatedRoute, private productService: ProductService) { }
@@ -27,9 +29,11 @@ export class CategoryProductComponent implements OnInit, OnDestroy {
   }
 
   private getCategoryProduct(): void {
+    this.isLoading = true;
     this.productService.getCategoryProduct(this.category)
       .pipe(
         takeUntil(this.destroy$),
+        finalize(() => this.isLoading = false)
       )
       .subscribe((products: any) => {
         this.products = products;

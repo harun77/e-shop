@@ -70,6 +70,14 @@ body {
   text-align: center;
 }
 
+.delete {
+  cursor: pointer;
+}
+
 .item-header {
   font-weight: 500;
+}
+
+.mat-list-item-content {
+  padding: 0 !important;
 }

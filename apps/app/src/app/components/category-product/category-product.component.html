@@ -1,24 +1,24 @@
-<h1>Product List - {{ category }}</h1>
+<div *ngIf="isLoading; else product" class="loader">
+    <img src="../assets/icons/progress.gif" alt="">
+</div>
 
-<!-- <mat-list>
-    <mat-list-item *ngFor="let product of products">
-        {{ product.title }} {{ product.price }}
-    </mat-list-item>
-</mat-list> -->
+<ng-template #product>
+    <h1>Product List - {{ category }}</h1>
 
-<mat-list>
-    <mat-list-item>
-        <div class="item item-header">
-            <span>Title</span>
-            <span class="grow"></span>
-            <span class="price">Price</span>
-        </div>
-    </mat-list-item>
-    <mat-list-item *ngFor="let product of products">
-        <div class="item">
-            <span>{{ product.title }}</span>
-            <span class="grow"></span>
-            <span class="price">{{ product.price }}</span>
-        </div>
-    </mat-list-item>
-</mat-list>
+    <mat-list>
+        <mat-list-item>
+            <div class="item item-header">
+                <span>Title</span>
+                <span class="grow"></span>
+                <span class="price">Price</span>
+            </div>
+        </mat-list-item>
+        <mat-list-item *ngFor="let product of products">
+            <div class="item">
+                <span>{{ product.title }}</span>
+                <span class="grow"></span>
+                <span class="price">{{ product.price }}</span>
+            </div>
+        </mat-list-item>
+    </mat-list>
+</ng-template>
