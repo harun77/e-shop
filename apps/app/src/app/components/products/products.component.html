@@ -1,1 +1,44 @@
-<p>products works!</p>
+<mat-progress-bar *ngIf="pageLoading" class="progress-bar" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="isLoading; else product" class="loader">
+    <img src="../assets/icons/progress.gif" alt="">
+</div>
+<ng-template #product>
+    <div class="header">
+        <h1>Product list</h1>
+        <div class="action">
+            <mat-form-field>
+                <mat-label>Sort by price</mat-label>
+                <mat-select [(ngModel)]="sortBy" (selectionChange)="sort()">
+                    <mat-option [value]="'asc'">Low to high</mat-option>
+                    <mat-option [value]="'desc'">High to low</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button routerLink="/add-product" mat-raised-button color="primary">Add product</button>
+        </div>
+    </div>
+
+    <mat-chip-list>
+        <mat-chip *ngFor="let category of categories" (click)="categoryProduct(category)">{{ category }}</mat-chip>
+    </mat-chip-list>
+
+    <mat-list>
+        <mat-list-item>
+            <div class="item item-header">
+                <span>Title</span>
+                <span class="grow"></span>
+                <span class="price">Price</span>
+                <span class="delete">Delete</span>
+            </div>
+        </mat-list-item>
+        <mat-list-item *ngFor="let product of products" (click)="detail(product.id)">
+            <div class="item">
+                <span>{{ product.title }}</span>
+                <span class="grow"></span>
+                <span class="price">{{ product.price }}</span>
+                <span class="delete">
+                    <mat-icon color="warn" (click)="deleteProduct(product.id, $event)">delete</mat-icon>
+                </span>
+            </div>
+        </mat-list-item>
+    </mat-list>
+</ng-template>

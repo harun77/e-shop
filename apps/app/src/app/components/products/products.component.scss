@@ -1,0 +1,25 @@
+.progress-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+
+    h1 {
+        margin: 0;
+    }
+
+    .action {
+        display: flex;
+        gap: 24px;
+    }
+}
+
+.mat-list-item .mat-list-item-content {
+    padding: 0 !important;
+}

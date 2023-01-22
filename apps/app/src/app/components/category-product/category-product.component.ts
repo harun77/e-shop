@@ -5,13 +5,15 @@ import { Product } from '../../models/product';
 import { ProductService } from '../../services/product/product.service';
 
 @Component({
-  selector: 'lowgular-acms-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss'],
+  selector: 'lowgular-acms-category-product',
+  templateUrl: './category-product.component.html',
+  styleUrls: ['./category-product.component.scss'],
 })
-export class ProductComponent implements OnInit, OnDestroy {
+export class CategoryProductComponent implements OnInit, OnDestroy {
 
-  product: Product | undefined;
+  category: string;
+
+  products: Product[];
 
   destroy$: Subject<boolean> = new Subject();
 
@@ -19,19 +21,19 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const id = params['id'];
-      this.getProduct(id);
+      this.category = params['category'];
+      this.getCategoryProduct();
     });
   }
 
-  private getProduct(id: number): void {
-    this.productService.getProduct(id)
+  private getCategoryProduct(): void {
+    this.productService.getCategoryProduct(this.category)
       .pipe(
         takeUntil(this.destroy$),
       )
-      .subscribe((product: Product) => {
-        this.product = product;
-      })
+      .subscribe((products: any) => {
+        this.products = products;
+      });
   }
 
   ngOnDestroy(): void {

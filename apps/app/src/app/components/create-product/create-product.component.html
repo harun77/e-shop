@@ -1,1 +1,30 @@
-<p>create-product works!</p>
+<h1>Add product</h1>
+
+<form class="form" [formGroup]="productForm" (ngSubmit)="add()">
+    <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" placeholder="Title" autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput type="number" formControlName="price" placeholder="Price" autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" placeholder="Description" autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Category</mat-label>
+        <input matInput formControlName="category" placeholder="Category" autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Image</mat-label>
+        <input matInput formControlName="image" placeholder="Image" autocomplete="off">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary">Submit</button>
+</form>
